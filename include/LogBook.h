@@ -16,7 +16,7 @@ enum class LogLevel
     ALL_LEVEL
 };
 
-// Из строки в перечисление
+// Из строки в перечисление, если передано пустое значение, то возвращает INFO
 LogLevel parseFromStringToLogLevel(const std::string& levelStr);
 
 // Из перечисления в строку

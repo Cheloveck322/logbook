@@ -26,7 +26,7 @@ void LogApp::start()
             }
 
             // Обработка изменения режима по умолчанию
-            if (input.find("setlevel ") == 0)
+            if (input.find("setlevel") == 0)
             {
                 m_changeDefaultLevel(input);
                 continue;
@@ -75,20 +75,10 @@ void LogApp::m_changeDefaultLevel(const std::string& input)
     }
 
     std::string levelStr { input.substr(pos + 1) };
-    LogLevel newLevel;
+    LogLevel newLevel { parseFromStringToLogLevel(levelStr) };
 
-    if (levelStr.empty())
-    {
-        newLevel = LogLevel::INFO;
-    }
-    else
-    {
-        newLevel = parseFromStringToLogLevel(levelStr);
-    }
-
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock{ m_mutex };
     m_logbook.setLogLevel(newLevel);
-    
 
-    std::cout << "Default level changed to : " << (levelStr.empty() ? "INFO" : levelStr) << std::endl;
+    std::cout << "Default level changed to : " << (levelStr.empty() ? "INFO" : logLevelToString(newLevel)) << std::endl;
 }

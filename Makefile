@@ -24,10 +24,10 @@ $(APP): $(APP_SOURCES) include/LogApp.h $(LIBRARY)
 #Цель для запуска приложения
 run: all
 	@echo "Running app..."
-	@LD_LIBRARY_PATH=. ./$(APP) output.txt INFO
+	./$(APP) output.txt INFO
 
 # Очистка
-clean:
+clear:
 	rm -f $(LIBRARY) $(APP) *.o 
 
-.PHONY: all clean
+.PHONY: all clear
